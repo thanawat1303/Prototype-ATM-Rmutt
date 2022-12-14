@@ -1,15 +1,15 @@
-import bankATM.lib.*;
-import java.util.*;;
+import bankATM.*;
+import java.util.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        float numAccount = 0;
+        float numAccount = 0; //จำนวนผู้ใช้งาน
         String nameATM = "ATM ComputerThanyaburi Bank";
 
         // รับค่าจำนวนบัญชี และตรวจสอบค่าจากที่รับ
         do {
             numAccount = inputFieldNumber("Step 1. Enter amount of all account = ");
-            if (numAccount >= 5)
+            if (numAccount >= 2)
                 break;
             else
                 reportReturn("Please enter account then 5");
@@ -47,10 +47,13 @@ public class App {
 
             do {
                 nameInput = inputFieldString("Account Name=");
-                if (nameInput.length() <= 50)
+                if (nameInput.length() <= 50 && nameInput.length() != 0)
                     break;
                 else
-                    reportReturn("Account Name less than or equal to 50 charector");
+                    if(nameInput.length() > 50) 
+                        reportReturn("Account Name less than or equal to 50 charector");
+                    else if(nameInput.length() == 0)
+                        reportReturn("Account Name no emply");
             } while (true);
 
             do {
@@ -96,10 +99,11 @@ public class App {
                             statusLogin = "pass login";
                             posisionAccount = x;
                             break;
+                        } else {
+                            statusLogin = "";
                         }
                     }
-                    if (statusLogin.equals("pass login"))
-                        break;
+                    break;
                 } else {
                     statusLogin = "Invaid account";
                 }
@@ -111,13 +115,13 @@ public class App {
 
                     try {
                         Float choose = inputFieldNumber("Choose : ");
-                        if (choose == 1) {
+                        if (choose == 1) {//เช็ตเงิน
                             System.out.println("-------------------------------------");
                             System.out.print("Account Balance : "
                                     + String.valueOf(accountList.get(posisionAccount).getBalance())
                                     + " Bath\n");
-                        } else if (choose == 2) {
-                            Float withdrawal;
+                        } else if (choose == 2) {//ถอนเงิน
+                            Float withdrawal;//เก็บจำนวนเงินที่ต้องการถอน
                             do {
                                 try {
                                     System.out.println("-------------------------------------");
