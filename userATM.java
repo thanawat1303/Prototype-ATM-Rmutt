@@ -1,5 +1,4 @@
-package bankATM.lib;
-
+package bankATM;
 public class userATM {
     private String idUser;
     private String nameUser;
